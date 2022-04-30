@@ -1,0 +1,33 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>作業07</title>
+</head>
+<body>
+<style>
+h3 {
+color: blue;
+}
+h4 {
+color: red;
+}
+p {
+margin: 5px;
+}
+div {
+color: blue;
+}
+</style>
+<h4>以下為九九乘法表</h4>
+<table border=1 color="00ff00">
+	<script>
+for (let i = 1; i <= 9; i++) {
+document.write("<tr>")
+        for (let j = 1; j <= 9; j++) {
+            document.write("<td><div>"+i+"x"+j+"="+i*j+"&emsp;"+"</div>")
+        }
+ }
+</script>
+</table>
+</body>
+</html>
