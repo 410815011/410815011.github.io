@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作業12</title>
+    <style>
+	         h4 {
+		     color: red;
+		 }
+		 label {
+		     color: blue;
+		 }
+		 input {
+		     color: ;
+		 }
+		 div {
+		     color: blue;
+		     margin: 5px;
+		 }
+	 </style>
+</head>
+
+<body>
+<form id="form01">
+    <label>姓名：</label>
+    <input type="text" name="name01" value="游雅婷"><br>
+    <label>收件住址： </label>
+    <input type="text" name="address01" style="width: 200px;" value="台北市萬華區長泰街18號3樓"><br>
+    <label>電話：</label>
+    <input type="tel" name="tel01" value="0975877575"><br>
+    <label>電子郵件： </label>
+    <input type="email" name="email01" value="711gianna90215@gmail.com"><br>
+    <label>指定送貨日期： </label>
+    <input type="date" name="date01"><br>
+    <label>水果種類：</label><br>
+    <input type="checkbox" name="fruit" id="fruit01" value="水蜜桃(1箱)">水蜜桃(1箱) 599元;
+    <label>購買數量：</label>
+    <input type="number" name="number01"><br>
+    <input type="checkbox" name="fruit02" id="fruit02" value="哈密瓜(3台斤)">哈密瓜(3台斤) 480元;
+    <label>購買數量：</label>
+    <input type="number" name="number02"><br>
+    <input type="checkbox" name="fruit03" id="fruit03" value="番石柳(4台斤)">番石柳(4台斤) 390元;
+    <label>購買數量：</label>
+    <input type="number" name="number03"><br>
+    <input type="checkbox" name="fruit04" id="fruit04" value="火龍果(10顆)">火龍果(10顆) 1080元;
+    <label>購買數量：</label>
+    <input type="number" name="number04"><br>
+
+</form>
+<br>
+<button onclick="shoppingInfo()"><h4>結帳</h4></button>
+<div id="demo"></div>
+<script>
+	var text = "<h4>您的購物資訊如下:</h4>";
+	var fruit = function (fruitType, fruitPrice, no){
+		this.Type = fruitType;
+		this.Price = fruitPrice;
+		this.subTotal = function(no) {
+			text += "<tr><td><span style='color:purple;'>水果種類: </span><td>" + this.Type + "<td>" + no + "單位<br>";
+			text += "<tr><td><span style='color:purple;'>價格小計: </span><td>" + this.Price * no + "元<br><td>";
+		}
+	}
+	var fruit01 = new fruit("水蜜桃(1箱)", 599, 0);
+	var fruit02 = new fruit("哈密瓜(3台斤)", 480, 0);
+	var fruit03 = new fruit("番石柳(4台斤)", 390, 0);
+	var fruit04 = new fruit("火龍果(10顆)", 1080, 0);
+
+    function shoppingInfo() {
+        const x = document.getElementById("form01");
+        var item = "";
+        var sumToPay = 0;
+
+        var i;
+		text += "<table style='border:2px #FFAC55 solid;padding:2px;' rules='all' cellpadding='2';>";
+        for (i = 0; i < 5; i++) {
+            switch (i) {
+                case 0:
+                    item = "<tr><td><span style='color:purple;'>姓名: </span><td>";
+                    break;
+                case 1:
+                    item = "<tr><td><span style='color:purple;'>收件住址: </span><td>";
+                    break;
+                case 2:
+                    item = "<tr><td><span style='color:purple;'>電話： </span><td>";
+                    break;
+                case 3:
+                    item = "<tr><td><span style='color:purple;'>電子郵件： </span><td>";
+                    break;
+                case 4:
+                    item = "<tr><td><span style='color:purple;'>指定送貨日期： </span><td>";
+                    break;
+         }
+         text += item + x.elements[i].value + "<br><td>";
+     }
+     for (i = 5; i <= 11; i++) {
+         if (x.elements[i].checked == true) {
+            switch (i) {
+                case 5:
+                    fruit01.no = x.elements[i+1].value;
+					sumToPay += fruit01.Price * fruit01.no;
+					fruit01.subTotal(fruit01.no);
+                    break;
+                case 7:
+                    fruit02.no = x.elements[i+1].value;
+					sumToPay += fruit02.Price * fruit02.no;
+					fruit02.subTotal(fruit02.no);
+                    break;
+				case 9:
+                    fruit03.no = x.elements[i+1].value;
+					sumToPay += fruit03.Price * fruit03.no;
+					fruit03.subTotal(fruit03.no);
+                    break;
+				case 11:
+                    fruit04.no = x.elements[i+1].value;
+					sumToPay += fruit04.Price * fruit04.no;
+					fruit04.subTotal(fruit04.no);
+                    break;
+            }
+
+        }
+     }
+     text += "<tr><td style='height:50px'><span style='color:red;'><b>價格合計: </b><td style='height:50px'><span style='color:red;'><b>" + sumToPay + "元</b><br><td style='height:50px'>" + "</table>";
+     document.getElementById("demo").innerHTML = text;
+
+}
+
+</script>
+</body>
+</html>
